@@ -29,16 +29,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String barcode = "";
+  String barcode = "No Scan Result!";
   Future scanBarcode() async {
     String barcodeResult = await FlutterBarcodeScanner.scanBarcode(
         "#ff6666", "Cancel", true, ScanMode.QR);
 
     setState(() {
-      barcode = barcodeResult;
+      barcode = barcodeResult ?? "No scan result!";
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // QrImage(data: "Ash", backgroundColor: Colors.blue, size: 300)
+            Text('Scan result: $barcode\n', style: TextStyle(fontSize: 20))
           ],
         ),
       ),
